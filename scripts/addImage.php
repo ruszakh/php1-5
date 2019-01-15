@@ -1,8 +1,10 @@
 <?php
 
+include __DIR__ . '/../functions/checkUsers.php';
+
 session_start();
 
-if (!isset($_SESSION['user'])) {
+if (null === getCurrentUser()) {
     ?>Загрузка доступна только авторизованным пользователям<br>
     <a href="/gallery.php">Назад</a>
     <?php die;

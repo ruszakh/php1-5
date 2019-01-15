@@ -1,5 +1,7 @@
 <?php
 
+include __DIR__ . '/functions/checkUsers.php';
+
 session_start();
 
 ?>
@@ -14,8 +16,16 @@ session_start();
     <title>PHP 1-5</title>
 </head>
 <body>
+<?php
 
-<a href="/login.php">Вход</a>
+if (null === getCurrentUser()) {
+    ?><a href="/login.php">Вход</a><?php
+} else {
+    ?>Вы вошли, как <?php echo $_SESSION['user'];?>
+    <br>
+    <form method="post" action="/logout.php">
+        <button type="submit">Выйти</button>
+    </form><?php } ?>
 <br>
 <a href="/guestbook.php">Гостевая книга</a>
 <br>

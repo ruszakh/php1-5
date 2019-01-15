@@ -4,10 +4,19 @@ include __DIR__ . '/functions/checkUsers.php';
 
 session_start();
 
-if (isset($_SESSION['user'])) {
+if (
+        isset($_POST['user']) &&
+        isset($_POST['password']) &&
+        checkPassword($_POST['user'], $_POST['password'])
+) {
+    $_SESSION['user'] = $_POST['user'];
+}
+
+if (null !== getCurrentUser()) {
     header('Location: /index.php');
     exit();
 }
+
 ?>
 
 <form method="post" action="/login.php">
@@ -17,11 +26,3 @@ if (isset($_SESSION['user'])) {
     <br>
     <button type="submit">Войти</button>
 </form>
-
-<?php
-
-if (isset($_POST['user']) && isset($_POST['password'])) {
-    if (checkPassword($_POST['user'], $_POST['password'])) {
-        $_SESSION['user'] = $_POST['user'];
-    }
-}
