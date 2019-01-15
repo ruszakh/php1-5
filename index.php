@@ -16,20 +16,19 @@ session_start();
     <title>PHP 1-5</title>
 </head>
 <body>
-<?php
+    <?php
 
-if (null === getCurrentUser()) {
-    ?><a href="/login.php">Вход</a><?php
-} else {
-    ?>Вы вошли, как <?php echo $_SESSION['user'];?>
+    if (null === getCurrentUser()) {
+        ?><a href="/login.php">Вход</a><?php
+    } else {
+        ?>Вы вошли, как <?php echo $_SESSION['user'];?>
+        <br>
+        <form method="post" action="/logout.php">
+            <button type="submit">Выйти</button>
+        </form><?php } ?>
     <br>
-    <form method="post" action="/logout.php">
-        <button type="submit">Выйти</button>
-    </form><?php } ?>
-<br>
-<a href="/guestbook.php">Гостевая книга</a>
-<br>
-<a href="/gallery.php">Галерея</a>
-
+    <a href="/guestbook.php">Гостевая книга</a>
+    <br>
+    <a href="/gallery.php">Галерея</a>
 </body>
 </html>
